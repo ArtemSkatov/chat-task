@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: 16px;
+}
+
 input {
   outline: none;
 }
+
+// body {
+//   min-height: 100vh;
+// }
+
+// #root {
+//   height: 100%;
+// }

@@ -1,14 +1,27 @@
 import classNames from "classnames";
+import {
+  FieldValues,
+  Path,
+  RegisterOptions,
+  UseFormRegister,
+} from "react-hook-form";
+// import { FieldValues, UseFormRegister } from "react-hook-form";
 
-export const MyInput = ({
+export const MyInput = <TFieldValues extends FieldValues>({
   classNameWrap,
   className,
   error,
+  register,
+  name,
+  settings,
   ...propsInput
 }: {
   classNameWrap?: string;
   className?: string;
   error?: string;
+  register?: UseFormRegister<TFieldValues>;
+  name?: Path<TFieldValues>;
+  settings?: RegisterOptions<TFieldValues>;
 } & React.InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <label className={classNames(classNameWrap)}>
@@ -18,6 +31,7 @@ export const MyInput = ({
           className
         )}
         {...propsInput}
+        {...(register && name && register(name, settings))}
       />
       {error && <span className="text-red-600">{error}</span>}
     </label>
