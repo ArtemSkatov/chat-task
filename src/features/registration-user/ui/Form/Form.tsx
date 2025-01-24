@@ -5,6 +5,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { submitFormRegistration } from "../../api/submitFormRegistration";
 import { User } from "@/entities/user/types/user";
+import { Link } from "react-router";
+import { ROUTES } from "@/shared/api/routes";
 
 type formProps = {
   repeatPassword: string;
@@ -74,6 +76,9 @@ export const Form = () => {
         />
         <MyButton>Registration</MyButton>
       </form>
+      <Link to={ROUTES.login} className="mx-auto block text-center mt-4">
+        Login
+      </Link>
     </div>
   );
 };

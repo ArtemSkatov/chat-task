@@ -5,6 +5,8 @@ import { Title } from "@/shared/ui/Titlle/Title";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { submitFormLogin } from "../../api/submitFormLogin";
+import { ROUTES } from "@/shared/api/routes";
+import { Link } from "react-router";
 
 export const Form = () => {
   const {
@@ -20,6 +22,7 @@ export const Form = () => {
   const submitForm = (data: User) => {
     mutate(data, {
       onSuccess: (response) => console.log(response),
+      onError: (error) => console.log(error, "error"),
     });
   };
 
@@ -45,6 +48,10 @@ export const Form = () => {
         />
         <MyButton>Login</MyButton>
       </form>
+
+      <Link className="mx-auto block text-center mt-4" to={ROUTES.registration}>
+        Registration
+      </Link>
     </div>
   );
 };
