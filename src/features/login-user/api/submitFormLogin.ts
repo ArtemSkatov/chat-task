@@ -1,6 +1,7 @@
-import { User } from "@/entities/user/types/user";
-import { apiService } from "@/shared/api/apiService";
 
-export const submitFormLogin = (formData: User) => {
-  return apiService.post("/login", formData).then(response => response.data);
+import { api } from "@/shared/api/apiService";
+import { MainLoginRequest } from "@/shared/api/generate/data-contracts";
+
+export const submitFormLogin = (formData: MainLoginRequest) => {
+  return api.loginCreate(formData).then(response => response.data);
 };

@@ -12,7 +12,7 @@ export const WithRouterProvider = () => {
         <Route element={<Layout />}>
           <Route path={ROUTES.registration} element={<Registration />} />
           <Route path={ROUTES.login} element={<Login />} />
-          <Route path={"/test"} element={<Test />} />
+          <Route path={ROUTES.home} element />
         </Route>
       </Routes>
     </BrowserRouter>
