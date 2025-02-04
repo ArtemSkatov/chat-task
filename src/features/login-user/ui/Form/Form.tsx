@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { submitFormLogin } from "../../api/submitFormLogin";
 import { ROUTES } from "@/shared/api/routes";
 import { Link } from "react-router";
+import { useDispatch } from "react-redux";
+import { loginUser } from "@/entities/user/model/userSlice";
 
 export const Form = () => {
   const {
@@ -14,6 +16,7 @@ export const Form = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<User>();
+  const dispatch = useDispatch();
 
   const { mutate } = useMutation({
     mutationFn: (formData: User) => submitFormLogin(formData),
@@ -21,7 +24,7 @@ export const Form = () => {
 
   const submitForm = (data: User) => {
     mutate(data, {
-      onSuccess: (response) => console.log(response),
+      onSuccess: (response) => dispatch(loginUser(response)),
       onError: (error) => console.log(error, "error"),
     });
   };

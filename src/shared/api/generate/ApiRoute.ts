@@ -11,26 +11,17 @@
 
 import {
   LoginCreateData,
-  LoginCreateError,
   LogoutCreateData,
-  LogoutCreateError,
   MainLoginRequest,
   MainRegisterRequest,
   ProfileListData,
-  ProfileListError,
   RefreshCreateData,
-  RefreshCreateError,
   RegisterCreateData,
-  RegisterCreateError,
 } from "./data-contracts";
-import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Api<
-  SecurityDataType = unknown,
-> extends HttpClient<SecurityDataType> {
+export namespace Api {
   /**
    * @description Авторизует пользователя и возвращает токены
-   *
    * @tags auth
    * @name LoginCreate
    * @summary Логин пользователя
@@ -40,18 +31,16 @@ export class Api<
    * @response `401` `Record<string,string>` Неверные данные
    * @response `500` `Record<string,string>` Ошибка сервера
    */
-  loginCreate = (input: MainLoginRequest, params: RequestParams = {}) =>
-    this.request<LoginCreateData, LoginCreateError>({
-      path: `/api/login`,
-      method: "POST",
-      body: input,
-      type: ContentType.Json,
-      format: "json",
-      ...params,
-    });
+  export namespace LoginCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = MainLoginRequest;
+    export type RequestHeaders = {};
+    export type ResponseBody = LoginCreateData;
+  }
+
   /**
    * @description Выход пользователя стирание refresh_token
-   *
    * @tags auth
    * @name LogoutCreate
    * @summary Выход пользователя
@@ -60,17 +49,16 @@ export class Api<
    * @response `400` `Record<string,string>` Ошибка валидации
    * @response `500` `Record<string,string>` Ошибка сервера
    */
-  logoutCreate = (params: RequestParams = {}) =>
-    this.request<LogoutCreateData, LogoutCreateError>({
-      path: `/api/logout`,
-      method: "POST",
-      type: ContentType.Json,
-      format: "json",
-      ...params,
-    });
+  export namespace LogoutCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = LogoutCreateData;
+  }
+
   /**
    * @description Возвращает информацию о текущем пользователе
-   *
    * @tags user
    * @name ProfileList
    * @summary Получить профиль пользователя
@@ -79,17 +67,16 @@ export class Api<
    * @response `200` `ProfileListData` user_id
    * @response `401` `Record<string,string>` Неавторизованный доступ
    */
-  profileList = (params: RequestParams = {}) =>
-    this.request<ProfileListData, ProfileListError>({
-      path: `/api/profile`,
-      method: "GET",
-      secure: true,
-      format: "json",
-      ...params,
-    });
+  export namespace ProfileList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ProfileListData;
+  }
+
   /**
    * @description Возвращает access_token
-   *
    * @tags user
    * @name RefreshCreate
    * @summary Переиздать access_token
@@ -98,17 +85,16 @@ export class Api<
    * @response `200` `RefreshCreateData` user_id
    * @response `401` `Record<string,string>` Неавторизованный доступ
    */
-  refreshCreate = (params: RequestParams = {}) =>
-    this.request<RefreshCreateData, RefreshCreateError>({
-      path: `/api/refresh`,
-      method: "POST",
-      secure: true,
-      format: "json",
-      ...params,
-    });
+  export namespace RefreshCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = RefreshCreateData;
+  }
+
   /**
    * @description Регистрирует нового пользователя и возвращает токены
-   *
    * @tags auth
    * @name RegisterCreate
    * @summary Регистрация нового пользователя
@@ -117,13 +103,11 @@ export class Api<
    * @response `400` `Record<string,string>` Ошибка валидации
    * @response `500` `Record<string,string>` Ошибка сервера
    */
-  registerCreate = (input: MainRegisterRequest, params: RequestParams = {}) =>
-    this.request<RegisterCreateData, RegisterCreateError>({
-      path: `/api/register`,
-      method: "POST",
-      body: input,
-      type: ContentType.Json,
-      format: "json",
-      ...params,
-    });
+  export namespace RegisterCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = MainRegisterRequest;
+    export type RequestHeaders = {};
+    export type ResponseBody = RegisterCreateData;
+  }
 }
